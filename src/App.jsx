@@ -1,11 +1,9 @@
-import React from 'react';
-
-const App = () => {
+function App() {
     return (
-        <div>
-            <h1>Frontend</h1>
+        <div className="mt-[20px] container mx-auto px-4">
+            <h1>APP</h1>
         </div>
     );
-};
+}
 
 export default App;
