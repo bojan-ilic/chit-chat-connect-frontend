@@ -4,6 +4,8 @@ import React from 'react';
 // Import 'ReactDOM' submodule from the 'react-dom' library
 import ReactDOM from 'react-dom/client';
 
+import './index.scss';
+
 // Import the main application component
 import App from './App';
 
@@ -15,6 +17,7 @@ import {
 
 // Import page components for application routes
 import Home from './pages/Home/Home.jsx'; // Main landing page
+import Register from './pages/Register/Register';
 
 // Define routes for the application
 const router = createBrowserRouter([
@@ -26,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />, // Render the Home component at the root URL '/'
+            },
+            {
+                path: '/register',
+                element: <Register />,
             },
         ],
     },
