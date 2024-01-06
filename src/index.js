@@ -17,15 +17,16 @@ import {
 
 // Import page components for application routes
 import Home from './pages/Home/Home.jsx'; // Main landing page
-import Register from './pages/Register/Register';
-import Login from './pages/Login/Login';
+import Register from './pages/Register/Register'; // Import Register page component
+import Login from './pages/Login/Login'; // Import Login page component
+import Error from './pages/Error/Error'; // Import Error page component
 
 // Define routes for the application
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App />, // Using the App component as the root element for routing
-        errorElement: '<div>Error page</div>', // Specifying an error element
+        errorElement: <Error />, // Render the Error component for any encountered errors
         children: [
             {
                 path: '/',
@@ -33,11 +34,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/register',
-                element: <Register />,
+                element: <Register />, // Render the Register component at '/register'
             },
             {
                 path: '/login',
-                element: <Login />,
+                element: <Login />, // Render the Login component at '/login'
             },
         ],
     },

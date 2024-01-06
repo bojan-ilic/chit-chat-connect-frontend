@@ -44,14 +44,7 @@ const Register = () => {
                 </select>
 
                 <label className="text-[15px] text-gray-600">Image:</label>
-                <input
-                    type="file"
-                    name="image"
-                    onChange={(e) => {
-                        const selectedFile = e.target.files[0];
-                        const fieldName = e.target.name;
-                    }}
-                />
+                <input type="file" name="image" />
 
                 <label className="text-[15px] text-gray-600">Birthdate:</label>
                 <input
