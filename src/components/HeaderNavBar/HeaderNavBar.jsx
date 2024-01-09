@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const HeaderNavBar = () => {
     // Define navigation items array for header links
-    const navItems = [
+    const headerNavItems = [
         { to: '/', text: 'Home' }, // Define a navigation item for the 'Home' link with the route '/'
         { to: '/register', text: 'Register' }, // Define a navigation item for the 'Register' link with the route '/register'
         { to: '/login', text: 'Login' }, // Define a navigation item for the 'Login' link with the route '/login'
@@ -11,7 +11,7 @@ const HeaderNavBar = () => {
 
     return (
         <nav className="flex gap-3">
-            {navItems.map((item, index) => (
+            {headerNavItems.map((item, index) => (
                 <NavLink
                     key={index}
                     to={item.to}
