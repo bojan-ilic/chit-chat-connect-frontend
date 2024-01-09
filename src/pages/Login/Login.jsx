@@ -1,4 +1,6 @@
 import LoginPageCover from '../../assets/login-page-cover.png';
+import TitleHeader from '../../components/TitleHeader/TitleHeader';
+
 const Login = () => {
     return (
         <div className="mb-[23px] mt-[15px] grid grid-cols-1 lg:mt-[53px] lg:grid-cols-2 lg:gap-2">
@@ -9,7 +11,8 @@ const Login = () => {
                     alt="Login page cover"
                 />
             </div>
-            <div>
+            <div className="lg:ml-[26px]">
+                <TitleHeader title="Login" />
                 <div className="border-primary mt-[23px] mt-[52px] w-full rounded-lg border-[0.5px]">
                     <form className=" mx-auto mt-[14px] flex flex-col p-[26px]">
                         <div className="mt-[10px]">
