@@ -1,5 +1,6 @@
 import LoginPageCover from '../../assets/login-page-cover.png';
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
+import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
 
 const Login = () => {
     return (
@@ -42,6 +43,11 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
+                <AuthRedirectMessage
+                    message="Don't have an account?"
+                    linkText="Click here to Register."
+                    redirectTo="/register"
+                />
             </div>
         </div>
     );

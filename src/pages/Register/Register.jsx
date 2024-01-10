@@ -1,4 +1,5 @@
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
+import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
 
 const Register = () => {
     return (
@@ -80,6 +81,11 @@ const Register = () => {
                         </button>
                     </form>
                 </div>
+                <AuthRedirectMessage
+                    message="Already have an account?"
+                    linkText="Click here to Sign in."
+                    redirectTo="/login"
+                />
             </div>
         </div>
     );
