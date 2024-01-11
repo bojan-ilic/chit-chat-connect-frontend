@@ -12,12 +12,12 @@ const Header = () => {
         <header className="border-primary relative flex items-center justify-between border bg-white px-4 py-4">
             {/* LogoBox component renders the site's logo */}
             <LogoBox />
-            <div className="ml-4 flex flex w-full justify-between">
+            <div className="mx-4 flex flex-grow items-center justify-center">
                 {/* HeaderNavBar component renders the navigation bar */}
                 <HeaderNavBar />
-                {/* HeaderAccount component manages account-related elements */}
-                <HeaderAccount />
             </div>
+            {/* HeaderAccount component manages account-related elements */}
+            <HeaderAccount />
         </header>
     );
 };
