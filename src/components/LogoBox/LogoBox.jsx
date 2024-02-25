@@ -1,5 +1,5 @@
 // Import the site logo file
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/ChitChatConnect-Logo.svg';
 
 // Import Link from React Router for route-based navigation without full page reloads
 import { Link } from 'react-router-dom';

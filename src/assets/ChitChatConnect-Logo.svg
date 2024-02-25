@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+        width="229"
+        height="40"
+        viewBox="0 0 60.589582 10.583333"
+        version="1.1"
+        id="svg5"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg">
+  <defs id="defs2" />
+    <g id="layer1">
+    <text
+            xml:space="preserve"
+            style="font-size:6.08542px; font-family:sans-serif; fill:#51cf66; fill-opacity:1;"
+            x="12.533026"
+            y="7.573699"
+            id="text368">
+      <tspan
+              id="tspan366"
+              x="12.533026"
+              y="7.573699">ChitChatConnect</tspan>
+    </text>
+        <g id="g662" style="fill:#51cf66; fill-opacity:1" transform="matrix(0.52916665,0,0,0.52916665,-1.0604023,-1.0645662)">
+      <path
+              d="M 8,12 H 8.01 M 12,12 h 0.01 M 16,12 h 0.01 m 4.9939,0 c 0,4.9706 -4.0294,9 -9,9 -2.0364,0 -8.99927,0 -8.99927,0 0,0 1.55919,-3.7439 0.93519,-4.9992 C 3.34076,14.7956 3.00391,13.4372 3.00391,12 c 0,-4.97056 4.02943,-9 8.99999,-9 4.9706,0 9,4.02944 9,9 z"
+              stroke="#000000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              id="path653"
+              style="fill:#51cf66;fill-opacity:1" />
+    </g>
+  </g>
+</svg>
