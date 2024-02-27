@@ -1,38 +1,24 @@
-// Import 'useSpring' hook and 'animated' component from '@react-spring/web' library that enable animation creation and manipulation
-import { useSpring, animated } from '@react-spring/web';
+// Import ClipLoader component from react-spinners library for displaying loading animation
+import { ClipLoader } from 'react-spinners';
 
 /**
- * PageLoaderAnimation component displays a loader animation using react-spring.
- * It creates a looping animation with changing background colors and position.
- * @returns {JSX.Element} Returns a JSX element displaying the loader animation.
+ * PageLoaderAnimation component
+ *
+ * This component renders a full-screen page loader animation using ClipLoader from react-spinners.
+ * It utilizes the primary color defined in the Tailwind CSS configuration.
  */
 const PageLoaderAnimation = () => {
-    // Configure springs with animated properties for smooth transitions in the animation
-    const springs = useSpring({
-        // Define initial values and the starting animation state
-        from: { background: '#ff6d6d', y: -40, x: 0 },
-        // Define to-values for the animation to transition through
-        to: [
-            { x: 80, background: '#fff59a' },
-            { y: 40, background: '#88DFAB' },
-            { x: 0, background: '#569AFF' },
-            { y: -40, background: '#ff6d6d' },
-        ],
-        // Enable looping of the animation
-        loop: true,
-    });
+    // Define primary color from Tailwind CSS configuration
+    const primaryColor = '#51cf66';
 
-    // Render the loader animation using an animated div
     return (
-        <div className="flex h-screen items-center justify-center">
-            <animated.div
-                className="h-10 w-10 rounded-md shadow-lg"
-                style={{
-                    ...springs, // Apply animated values from react-spring
-                }}
-            />
+        // Render a fixed-positioned flex container covering the entire viewport with a semi-transparent black background
+        <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-[rgba(0,0,0,0.5)]">
+            {/* Render ClipLoader with primary color and responsive sizes */}
+            <ClipLoader color={primaryColor} size="10vw" />
         </div>
     );
 };
 
+// Export the PageLoaderAnimation component as the default export for use in other parts of the application
 export default PageLoaderAnimation;
