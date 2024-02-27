@@ -1,10 +1,14 @@
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
 import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
+import RegisterPageCover from '../../assets/Register-page.jpg';
 
 const Register = () => {
     return (
         <div className="lg:ml-[26px]">
             <TitleHeader title="Register" />
+            <div>
+                <img src={RegisterPageCover} alt="" />
+            </div>
             <div>
                 <div className="border-primary mt-[52px] rounded-lg border-[0.5px]">
                     <form className="border-primary mx-auto mt-[30px] flex w-[70%] flex-col border p-[10px]">

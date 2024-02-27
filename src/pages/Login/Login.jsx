@@ -1,4 +1,4 @@
-import LoginPageCover from '../../assets/login-page-cover.png';
+import LoginPageCover from '../../assets/Login-page.jpg';
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
 import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
 
