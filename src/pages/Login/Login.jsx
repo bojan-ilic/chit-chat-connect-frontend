@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import LoginPageCover from '../../assets/Login-page.jpg';
-=======
 import LoginPageCover from '../../assets/Login-page.png';
->>>>>>> Stashed changes
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
 import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
 
