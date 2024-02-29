@@ -16,7 +16,24 @@ import { useDispatch } from 'react-redux';
 // Import restoreUser action from userSlice to reload user state from storage on app load
 import { restoreUser } from './store/userSlice';
 
-function App() {
+// Import axios for HTTP request functionality with RESTful APIs
+import axios from 'axios';
+
+// Set the API base URL based on the environment
+axios.defaults.baseURL =
+    process.env.NODE_ENV === 'development'
+        ? 'http://localhost:4000/api'
+        : 'https://backend.chit-chat-connect.bojanilic.net/api';
+
+// Use an interceptor to attach the token to every request if available
+axios.interceptors.request.use((config) => {
+    if (localStorage.hasOwnProperty('sm_token')) {
+        config.headers.authorization = localStorage.getItem('sm_token');
+    }
+    return config;
+});
+
+const App = () => {
     // Initialize useDispatch hook to enable dispatching actions to the Redux store
     const dispatch = useDispatch();
 
@@ -36,6 +53,6 @@ function App() {
             <Footer />
         </div>
     );
-}
+};
 
 export default App;
