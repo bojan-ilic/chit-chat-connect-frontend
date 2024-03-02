@@ -16,6 +16,12 @@ import { useDispatch } from 'react-redux';
 // Import restoreUser action from userSlice to reload user state from storage on app load
 import { restoreUser } from './store/userSlice';
 
+// Import the ToastContainer component from 'react-toastify' to enable toast notifications in the application
+import { ToastContainer } from 'react-toastify';
+
+// Import the CSS for react-toastify to ensure toast notifications are styled correctly
+import 'react-toastify/dist/ReactToastify.css';
+
 // Import axios for HTTP request functionality with RESTful APIs
 import axios from 'axios';
 
@@ -49,6 +55,8 @@ const App = () => {
             <Header />
             {/* Outlet component renders the content of children elements specified in the router configuration in index.js file */}
             <Outlet />
+            {/* Include the ToastContainer component in the JSX to provide a container for displaying toast notifications */}
+            <ToastContainer />
             {/* Footer component renders bottom navigation and information */}
             <Footer />
         </div>
