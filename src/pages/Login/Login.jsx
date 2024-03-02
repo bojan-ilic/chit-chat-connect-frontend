@@ -75,25 +75,24 @@ const Login = () => {
         }),
         // Handle form submission including validation, login attempt, and post-login behavior
         onSubmit: async (values, { setSubmitting }) => {
-            setIsLoading(true); // Set loading state to true to indicate processing
             try {
                 const response = await UserService.loginUser(values); // Attempt to log with provided credentials
                 if (response.status === 200) {
-                    toast.success('User successfully logged in'); // Show success message
+                    setIsLoading(true); // Only show loader after confirming login success to enhance user feedback
+                    toast.success('User successfully logged in'); // Display success toast message
                     localStorage.setItem('sm_token', response.data.token); // Store session token
-                    dispatch(loginUser(response.data.user)); // Dispatch user data to Redux store
-                    setTimeout(() => navigate('/'), 2000); // Redirect to home page after 2 seconds
+                    dispatch(loginUser(response.data.user)); // Dispatch user data to Redux store for global state management
+                    setTimeout(() => {
+                        navigate('/'); // Navigate to homepage after a short delay
+                        setIsLoading(false); // Hide loader after navigation to ensure it's only visible during the login process
+                    }, 2000); // Redirect to home page after 2 seconds
                 } else {
                     toast.warning('User not logged in'); // Show warning if login fails
                 }
             } catch (error) {
                 toast.error('An error occurred. Please try again.'); // Show error message on failure
             } finally {
-                // Delay the hiding of the loader
-                setTimeout(() => {
-                    setIsLoading(false); // Hide loader
-                    setSubmitting(false); // Finish form submission
-                }, 1000);
+                setSubmitting(false); // Reset form submission state to allow for new submissions
             }
         },
     });
