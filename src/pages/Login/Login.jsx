@@ -37,44 +37,63 @@ import PageLoaderAnimation from '../../components/PageLoaderAnimation/PageLoader
 // Import MdVisibilityOff and MdVisibility from react-icons/md for password visibility toggle
 import { MdVisibilityOff, MdVisibility } from 'react-icons/md';
 
+/**
+ * Login component for handling user authentication in a React application.
+ * It uses Formik for form management, Yup for validation, and integrates with Redux for state management and react-router-dom for navigation.
+ * It renders a form for user login, displays validation messages, and manages the login process.
+ *
+ * @returns {React.Component} A JSX component rendering the login form and associated UI elements.
+ */
 const Login = () => {
+    // Access Redux's dispatch function
     const dispatch = useDispatch();
+    // Navigate to different routes after actions
     const navigate = useNavigate();
 
+    // State for managing loading indicator visibility
     const [isLoading, setIsLoading] = useState(false);
-
+    // State for toggling password visibility
     const [passwordVisible, setPasswordVisible] = useState(true);
 
+    // Toggle the password visibility state
     const handleVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
 
+    // Initialize Formik for form handling
     const formik = useFormik({
+        // Set initial values for form fields to empty strings
         initialValues: {
             email: '',
             password: '',
         },
         validationSchema: Yup.object({
             email: Yup.string()
-                .email('Invalid email address')
-                .required('Email is required'),
-            password: Yup.string().required('Password is required'),
+                .email('Invalid email address') // Email must be a valid email format
+                .required('Email is required'), // Email is required
+            password: Yup.string().required('Password is required'), // Password is required
         }),
+        // Handle form submission including validation, login attempt, and post-login behavior
         onSubmit: async (values, { setSubmitting }) => {
+            setIsLoading(true); // Set loading state to true to indicate processing
             try {
-                const response = await UserService.loginUser(values);
+                const response = await UserService.loginUser(values); // Attempt to log with provided credentials
                 if (response.status === 200) {
-                    toast.success('User successfully logged in');
-                    localStorage.setItem('sm_token', response.data.token);
-                    dispatch(loginUser(response.data.user));
-                    setTimeout(() => navigate('/'), 2000);
+                    toast.success('User successfully logged in'); // Show success message
+                    localStorage.setItem('sm_token', response.data.token); // Store session token
+                    dispatch(loginUser(response.data.user)); // Dispatch user data to Redux store
+                    setTimeout(() => navigate('/'), 2000); // Redirect to home page after 2 seconds
                 } else {
-                    toast.warning('User not logged in');
+                    toast.warning('User not logged in'); // Show warning if login fails
                 }
             } catch (error) {
-                toast.error('An error occurred. Please try again.');
+                toast.error('An error occurred. Please try again.'); // Show error message on failure
             } finally {
-                setSubmitting(false);
+                // Delay the hiding of the loader
+                setTimeout(() => {
+                    setIsLoading(false); // Hide loader
+                    setSubmitting(false); // Finish form submission
+                }, 1000);
             }
         },
     });
@@ -85,22 +104,27 @@ const Login = () => {
 
     return (
         <>
+            {/* Show loader animation when isLoading is true */}
             {isLoading && <PageLoaderAnimation />}
             <div className="mb-[23px] mt-[15px] grid grid-cols-1 lg:mt-[53px] lg:grid-cols-2 lg:gap-2">
-                <div>
+                {/* Cover image for the login page */}
+                <div className="hidden lg:block">
                     <img
                         src={LoginPageCover}
-                        className="object-cover"
+                        className="w-full object-cover"
                         alt="Login page cover"
                     />
                 </div>
                 <div className="lg:ml-[26px]">
+                    {/* Display the page title */}
                     <TitleHeader title="Login" />
-                    <div className="border-primary mt-[23px] mt-[52px] w-full rounded-lg border-[0.5px]">
+                    <div className="border-primary mt-[52px] w-full rounded-lg border-[0.5px]">
+                        {/* Formik form for login */}
                         <form
                             onSubmit={formik.handleSubmit}
                             className=" mx-auto mt-[14px] flex flex-col p-[26px]"
                         >
+                            {/* Email input field */}
                             <div className="mt-[10px]">
                                 <label className="text-[15px] text-gray-600">
                                     Email:
@@ -117,6 +141,8 @@ const Login = () => {
                                     {showError('email')}
                                 </p>
                             </div>
+
+                            {/* Password input field */}
                             <div className="relative mt-[26px] ">
                                 <label className="text-[15px] text-gray-600">
                                     Password:
@@ -151,6 +177,7 @@ const Login = () => {
                                 </p>
                             </div>
 
+                            {/* Submit button */}
                             <div className="mt-[26px]">
                                 <button
                                     type="submit"
@@ -161,6 +188,7 @@ const Login = () => {
                             </div>
                         </form>
                     </div>
+                    {/* Display a message for users to register if they don't have an account */}
                     <AuthRedirectMessage
                         message="Don't have an account?"
                         linkText="Click here to Register."
@@ -172,4 +200,5 @@ const Login = () => {
     );
 };
 
+// Export the Login component as the default export for use in other parts of the application
 export default Login;
