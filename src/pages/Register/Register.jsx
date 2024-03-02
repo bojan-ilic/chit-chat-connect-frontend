@@ -1,7 +1,7 @@
-// Import React-router-dom's useNavigate hook for redirecting the user after successful registration
+// Import useNavigate hook from React-router-dom for redirecting the user after successful registration
 import { useNavigate } from 'react-router-dom';
 
-// Import React's useState hook for managing the loading state (e.g., during form submission)
+// Import useState hook from React for managing the loading state (e.g., during form submission)
 import { useState } from 'react';
 
 // Import Formik library for building forms in React, providing utilities for form handling, validation, and submission
@@ -19,17 +19,20 @@ import UserService from '../../services/userService';
 // Import react-toastify for displaying toast notifications to the user
 import { toast } from 'react-toastify';
 
-// Import TitleHeader component, a reusable UI component for displaying the page title
+// Import TitleHeader component for displaying the login page title
 import TitleHeader from '../../components/TitleHeader/TitleHeader';
 
 // Import AuthRedirectMessage component, a reusable UI component for displaying a message with a link to redirect users (e.g., to the login page)
 import AuthRedirectMessage from '../../components/AuthRedirectMessage/AuthRedirectMessage';
 
-// Import static asset for the registration page cover image
+// Import the cover image for the registration page
 import RegisterPageCover from '../../assets/Register-page.png';
 
 // Import PageLoaderAnimation component for displaying a loading animation during form submission
 import PageLoaderAnimation from '../../components/PageLoaderAnimation/PageLoaderAnimation';
+
+// Import MdVisibilityOff and MdVisibility from react-icons/md for password visibility toggle
+import { MdVisibilityOff, MdVisibility } from 'react-icons/md';
 
 /**
  *  Register.jsx
@@ -43,6 +46,12 @@ import PageLoaderAnimation from '../../components/PageLoaderAnimation/PageLoader
 const Register = () => {
     // Initialize the 'navigate' function from useNavigate hook to enable navigation to different routes
     const navigate = useNavigate();
+
+    const [passwordVisible, setPasswordVisible] = useState(true);
+
+    const handleVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     // Define a state variable 'isLoading' to manage the display of loading indicators, initially set to false (not loading)
     const [isLoading, setIsLoading] = useState(false);
@@ -95,11 +104,11 @@ const Register = () => {
         onSubmit: async (values) => {
             setIsLoading(true); // Set loading state to true to indicate processing
             try {
-                const res = await FileParser(values.image); // Attempts to parse the image file
+                const response = await FileParser(values.image); // Attempts to parse the image file
                 const data = await UserService.registerUser({
                     // Call the UserService to register a new user with the form values, spreading them into the service's expected parameters
                     ...values,
-                    image: res, // Include the parsed image data in the registration request
+                    image: response, // Include the parsed image data in the registration request
                 });
                 // Check if the user registration was successful based on the HTTP status code 200
                 if (data.status === 200) {
@@ -112,9 +121,10 @@ const Register = () => {
             } catch (error) {
                 // Display an error message to the user in case of a failure
                 toast.error('An error occurred. Please try again.');
+            } finally {
+                setIsLoading(false); // Reset the loading state to false, indicating that the submission process is complete
+                formik.resetForm(); // Reset the form after submission
             }
-            setIsLoading(false); // Reset the loading state to false, indicating that the submission process is complete
-            formik.resetForm(); // Reset the form after submission
         },
     });
 
@@ -191,18 +201,35 @@ const Register = () => {
                                         {showError('email')}
                                     </p>
                                 </div>
-                                <div className="mt-[8px]">
+                                <div className="relative mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Password:
                                     </label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        placeholder="Insert password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
-                                    />
+                                    <div className="flex w-full flex-row-reverse items-center">
+                                        <input
+                                            type={
+                                                passwordVisible
+                                                    ? 'password'
+                                                    : 'text'
+                                            }
+                                            name="password"
+                                            placeholder="Insert password"
+                                            value={formik.values.password}
+                                            onChange={formik.handleChange}
+                                            className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                                        />
+                                        {passwordVisible ? (
+                                            <MdVisibility
+                                                onClick={handleVisibility}
+                                                className="absolute mr-3 cursor-pointer text-lg"
+                                            />
+                                        ) : (
+                                            <MdVisibilityOff
+                                                onClick={handleVisibility}
+                                                className="absolute mr-3 cursor-pointer text-lg"
+                                            />
+                                        )}
+                                    </div>
                                     <p className="text-xs italic text-red-500">
                                         {showError('password')}
                                     </p>
