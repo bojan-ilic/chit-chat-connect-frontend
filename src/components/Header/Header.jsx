@@ -9,7 +9,7 @@ import HeaderAccount from '../HeaderAccount/HeaderAccount';
 
 const Header = () => {
     return (
-        <header className="border-primary relative flex items-center justify-between border bg-white px-4 py-4">
+        <header className="border-primary relative flex items-center justify-between rounded-lg border bg-white px-4 py-4">
             {/* LogoBox component renders the site's logo */}
             <LogoBox />
             <div className="mx-4 flex flex-grow items-center justify-center">
