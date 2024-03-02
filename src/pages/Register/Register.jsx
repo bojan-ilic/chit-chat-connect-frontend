@@ -101,10 +101,10 @@ const Register = () => {
                 ),
         }),
         // Handle form submission asynchronously
-        onSubmit: async (values) => {
+        onSubmit: async (values, { setSubmitting }) => {
             setIsLoading(true); // Set loading state to true to indicate processing
             try {
-                const response = await FileParser(values.image); // Attempts to parse the image file
+                const response = await FileParser(values.image); // Parse the image file
                 const data = await UserService.registerUser({
                     // Call the UserService to register a new user with the form values, spreading them into the service's expected parameters
                     ...values,
@@ -113,17 +113,22 @@ const Register = () => {
                 // Check if the user registration was successful based on the HTTP status code 200
                 if (data.status === 200) {
                     toast.success('User registration successful'); // Display a success message to the user upon successful registration
-                    setTimeout(() => navigate('/login'), 3000); // Redirect the user to the login page after a 3-second delay
+                    // Delay navigation, ensuring loader is displayed for a second
+                    setTimeout(() => {
+                        navigate('/login'); // Navigate to the login page
+                        setIsLoading(false); // Hide loader
+                        setSubmitting(false); // Finish form submission
+                    }, 1000); // Delay of 1 second
                 } else {
                     toast.warning('User already registered'); // Warn the user if the email is already registered
+                    setIsLoading(false); // Hide loader immediately if registration fails
+                    setSubmitting(false); // Finish form submission
                 }
                 // Catch block to handle and display errors during the registration process
             } catch (error) {
-                // Display an error message to the user in case of a failure
-                toast.error('An error occurred. Please try again.');
-            } finally {
-                setIsLoading(false); // Reset the loading state to false, indicating that the submission process is complete
-                formik.resetForm(); // Reset the form after submission
+                toast.error('An error occurred. Please try again.'); // Display an error message to the user in case of a failure
+                setIsLoading(false); // Hide loader if an error occurs
+                setSubmitting(false); // Finish form submission
             }
         },
     });
@@ -134,9 +139,10 @@ const Register = () => {
 
     return (
         <>
-            {/* Show loader animation when isLoading is true */}
+            {/* Loader animation displayed during form submission */}
             {isLoading && <PageLoaderAnimation />}
             <div className="mb-[23px] mt-[53px] grid grid-cols-1 gap-2 lg:grid-cols-2">
+                {/* Cover image for the registration page */}
                 <div className="hidden lg:block">
                     <img
                         src={RegisterPageCover}
@@ -144,14 +150,21 @@ const Register = () => {
                         alt="Register page cover"
                     />
                 </div>
+
+                {/* Registration form container */}
                 <div className="lg:ml-[26px]">
+                    {/* Page title component */}
                     <TitleHeader title="Register" />
+
+                    {/* Registration form section */}
                     <div>
                         <div className="border-primary mt-[52px] rounded-lg border-[0.5px]">
+                            {/* Formik form for handling registration */}
                             <form
                                 onSubmit={formik.handleSubmit}
                                 className="mb-4 rounded px-[26px]"
                             >
+                                {/* First name input field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Firstname:
@@ -164,15 +177,17 @@ const Register = () => {
                                         onChange={formik.handleChange}
                                         className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                                     />
+                                    {/* Display validation error message for first name */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('firstName')}
                                     </p>
                                 </div>
+
+                                {/* Last name input field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Lastname:
                                     </label>
-
                                     <input
                                         type="text"
                                         name="lastName"
@@ -181,10 +196,13 @@ const Register = () => {
                                         onChange={formik.handleChange}
                                         className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                                     />
+                                    {/* Display validation error message for last name */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('lastName')}
                                     </p>
                                 </div>
+
+                                {/* Email input field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Email:
@@ -197,10 +215,13 @@ const Register = () => {
                                         placeholder="Insert email"
                                         className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                                     />
+                                    {/* Display validation error message for email */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('email')}
                                     </p>
                                 </div>
+
+                                {/* Password input field */}
                                 <div className="relative mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Password:
@@ -218,6 +239,7 @@ const Register = () => {
                                             onChange={formik.handleChange}
                                             className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                                         />
+                                        {/* Toggle for password visibility */}
                                         {passwordVisible ? (
                                             <MdVisibility
                                                 onClick={handleVisibility}
@@ -230,10 +252,13 @@ const Register = () => {
                                             />
                                         )}
                                     </div>
+                                    {/* Display validation error message for password */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('password')}
                                     </p>
                                 </div>
+
+                                {/* Gender selection field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Gender:
@@ -250,10 +275,13 @@ const Register = () => {
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
+                                    {/* Display validation error message for gender */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('gender')}
                                     </p>
                                 </div>
+
+                                {/* Image upload field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Image:{' '}
@@ -268,10 +296,13 @@ const Register = () => {
                                             )
                                         }
                                     />
+                                    {/* Display validation error message for image */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('image')}
                                     </p>
                                 </div>
+
+                                {/* Birthdate input field */}
                                 <div className="mt-[8px]">
                                     <label className="text-[15px] text-gray-600">
                                         Birthdate:
@@ -283,10 +314,13 @@ const Register = () => {
                                         onChange={formik.handleChange}
                                         className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                                     />
+                                    {/* Display validation error message for birthdate */}
                                     <p className="text-xs italic text-red-500">
                                         {showError('birthDate')}
                                     </p>
                                 </div>
+
+                                {/* Submit button */}
                                 <div className="mt-[26px]">
                                     <button
                                         type="submit"
@@ -298,6 +332,8 @@ const Register = () => {
                             </form>
                         </div>
                     </div>
+
+                    {/* Message and link for users who already have an account */}
                     <AuthRedirectMessage
                         message="Already have an account?"
                         linkText="Click here to Sign in."
