@@ -86,13 +86,40 @@ const Login = () => {
                         navigate('/'); // Navigate to homepage after a short delay
                         setIsLoading(false); // Hide loader after navigation to ensure it's only visible during the login process
                     }, 2000); // Redirect to home page after 2 seconds
-                } else {
-                    toast.warning('User not logged in'); // Show warning if login fails
                 }
             } catch (error) {
-                toast.error('An error occurred. Please try again.'); // Show error message on failure
+                // Error handling based on HTTP status codes
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 404: // User not found
+                            toast.error(
+                                'No account associated with this email was found.',
+                            );
+                            break;
+                        case 422: // Invalid data, handling invalid password scenario
+                            toast.error(
+                                'Invalid login credentials. Please check your email and password and try again.',
+                            );
+                            break;
+                        case 500: // Internal server error
+                            toast.error(
+                                'The server encountered an unexpected error. Please try again later.',
+                            );
+                            break;
+                        default:
+                            toast.error(
+                                'An unexpected error occurred. Please try again.',
+                            );
+                    }
+                } else {
+                    // Handle no response scenario, such as network errors
+                    toast.error(
+                        'Network error. Please check your internet connection and try again.',
+                    );
+                }
             } finally {
                 setSubmitting(false); // Reset form submission state to allow for new submissions
+                setIsLoading(false); // Ensure loading state is reset in all cases
             }
         },
     });
