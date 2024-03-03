@@ -78,10 +78,12 @@ const Login = () => {
             try {
                 const response = await UserService.loginUser(values); // Attempt to log with provided credentials
                 if (response.status === 200) {
-                    setIsLoading(true); // Only show loader after confirming login success to enhance user feedback
+                    setIsLoading(true); // Display loader only for successful login
                     toast.success('User successfully logged in'); // Display success toast message
                     localStorage.setItem('sm_token', response.data.token); // Store session token
                     dispatch(loginUser(response.data.user)); // Dispatch user data to Redux store for global state management
+
+                    // Keep the loader visible for 2 seconds before executing the navigation
                     setTimeout(() => {
                         navigate('/'); // Navigate to homepage after a short delay
                         setIsLoading(false); // Hide loader after navigation to ensure it's only visible during the login process
@@ -119,7 +121,6 @@ const Login = () => {
                 }
             } finally {
                 setSubmitting(false); // Reset form submission state to allow for new submissions
-                setIsLoading(false); // Ensure loading state is reset in all cases
             }
         },
     });

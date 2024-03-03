@@ -102,7 +102,7 @@ const Register = () => {
         }),
         // Handle form submission asynchronously
         onSubmit: async (values, { setSubmitting }) => {
-            setIsLoading(true); // Set loading state to true to indicate processing
+            setIsLoading(true); // Show loader immediately when the form is submitted
             try {
                 // Parse the image file to a format acceptable by the backend
                 const parsedImage = await FileParser(values.image);
