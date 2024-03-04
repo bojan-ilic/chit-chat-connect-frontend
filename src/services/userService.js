@@ -1,3 +1,6 @@
+// Import axios for HTTP request functionality with RESTful APIs
+import axios from 'axios';
+
 /**
  * UserService module
  *
@@ -5,10 +8,6 @@
  * including user registration and login. It leverages axios for HTTP
  * requests to communicate with the authentication endpoints of the backend.
  */
-
-// Import axios for HTTP request functionality with RESTful APIs
-import axios from 'axios';
-
 class UserService {
     /**
      * Registers a new user
