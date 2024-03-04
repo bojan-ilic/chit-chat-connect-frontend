@@ -102,33 +102,65 @@ const Register = () => {
         }),
         // Handle form submission asynchronously
         onSubmit: async (values, { setSubmitting }) => {
-            setIsLoading(true); // Set loading state to true to indicate processing
+            setIsLoading(true); // Show loader immediately when the form is submitted
             try {
-                const response = await FileParser(values.image); // Parse the image file
-                const data = await UserService.registerUser({
-                    // Call the UserService to register a new user with the form values, spreading them into the service's expected parameters
-                    ...values,
-                    image: response, // Include the parsed image data in the registration request
-                });
-                // Check if the user registration was successful based on the HTTP status code 200
-                if (data.status === 200) {
-                    toast.success('User registration successful'); // Display a success message to the user upon successful registration
-                    // Delay navigation, ensuring loader is displayed for a second
+                // Parse the image file to a format acceptable by the backend
+                const parsedImage = await FileParser(values.image);
+
+                // Construct the object with parsed image data to be sent to the server
+                const registrationData = {
+                    ...values, // Include all form field values directly into the registrationData object
+                    image: parsedImage, // Include the parsed image data in the registration request
+                };
+
+                // Attempt to register the user with the provided registration data and handle the response
+                const response =
+                    await UserService.registerUser(registrationData);
+
+                if (response.status === 200) {
+                    // Display a success message to the user upon successful registration
+                    toast.success('User registration successful');
+                    // Delay navigation, ensuring loader is displayed for 2 seconds
                     setTimeout(() => {
                         navigate('/login'); // Navigate to the login page
                         setIsLoading(false); // Hide loader
                         setSubmitting(false); // Finish form submission
-                    }, 1000); // Delay of 1 second
-                } else {
-                    toast.warning('User already registered'); // Warn the user if the email is already registered
-                    setIsLoading(false); // Hide loader immediately if registration fails
-                    setSubmitting(false); // Finish form submission
+                    }, 2000); // Delay of 2 seconds
                 }
+
                 // Catch block to handle and display errors during the registration process
             } catch (error) {
-                toast.error('An error occurred. Please try again.'); // Display an error message to the user in case of a failure
-                setIsLoading(false); // Hide loader if an error occurs
-                setSubmitting(false); // Finish form submission
+                // Error handling based on HTTP status codes
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 409: // Handle the case where the provided email is already associated with an existing account
+                            toast.error(
+                                'A user with this email already exists. Please use a different email or try logging in.',
+                            );
+                            break;
+                        case 422: // Invalid data, handling invalid password scenario
+                            toast.error(
+                                'Invalid registration data. Please check your inputs and try again.',
+                            );
+                            break;
+                        case 500: // Internal server error
+                            toast.error(
+                                'Server encountered an error during the registration process. Please try again later.',
+                            );
+                            break;
+                        default: // Handle any unexpected errors not explicitly accounted for in the previous cases
+                            toast.error(
+                                'An unexpected error occurred. Please try again.',
+                            );
+                    }
+                } else {
+                    // Handle no response scenario, such as network errors
+                    toast.error('An error occurred. Please try again.');
+                }
+            } finally {
+                // Reset the form submission state and hide the loader regardless of the outcome of the registration attempt
+                setSubmitting(false); // Reset form submission state to allow for new submissions
+                setIsLoading(false); // Ensure loading state is reset in all cases, hiding the loader
             }
         },
     });
