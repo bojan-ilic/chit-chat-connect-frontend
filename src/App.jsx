@@ -50,7 +50,7 @@ const App = () => {
     }, []);
 
     return (
-        <div className="container mx-auto mt-[20px] px-4">
+        <div className="container mx-auto mb-[2rem] mt-[20px] px-4">
             {/* Header component renders top navigation and branding */}
             <Header />
             {/* Outlet component renders the content of children elements specified in the router configuration in index.js file */}
