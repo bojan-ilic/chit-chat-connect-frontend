@@ -27,6 +27,7 @@ import Home from './pages/Home/Home.jsx'; // Main landing page
 import Register from './pages/Register/Register'; // Import Register page component
 import Login from './pages/Login/Login'; // Import Login page component
 import Error from './pages/Error/Error'; // Import Error page component
+import Posts from './pages/Posts/Posts'; // Import Posts page component
 
 /**
  * @file Entry point for the Chit-Chat-Connect React application.
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />, // Render the Login component at '/login'
+            },
+            {
+                path: '/posts',
+                element: <Posts />, // Render the Posts component at '/posts'
             },
         ],
     },
