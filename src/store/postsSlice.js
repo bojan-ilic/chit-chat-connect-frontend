@@ -20,7 +20,7 @@ const postsSlice = createSlice({
 
         removePost: false, // Flag indicating whether a post removal action is triggered
         addRemoveLike: false, // Flag indicating whether a like toggle action is triggered
-        createPostNew: false, // Flag indicating whether a new post creation action is triggered
+        createNewPost: false, // Flag indicating whether a new post creation action is triggered
     },
     // Reducers functions defining how the state should change
     reducers: {
@@ -39,7 +39,7 @@ const postsSlice = createSlice({
         },
         // createPost reducer: Toggles the createPostNew flag
         createPost: (state, action) => {
-            state.createPostNew = !state.createPostNew;
+            state.createNewPost = !state.createNewPost;
         },
     },
 });
