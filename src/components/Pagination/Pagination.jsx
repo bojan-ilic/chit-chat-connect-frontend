@@ -55,7 +55,7 @@ const Pagination = () => {
     // Generate page number buttons based on the total item count and items per page, offering direct navigation to specific pages
     const pageOfPagination = () => {
         // Calculate the total number of pages based on the count of items and the limit per page
-        let numberOfPages = Math.ceil(count / limit);
+        let numberOfPages = Math.max(1, Math.ceil(count / limit));
 
         // Generate an array of page numbers and map over it to create button elements for each page
         return Array(numberOfPages)
