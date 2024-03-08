@@ -108,7 +108,7 @@ const PostCard = ({ post }) => {
                                 // 'likeInfo': Like details including user IDs and names, for like counts and status
                                 // 'user': Represents the currently logged-in user, used to check if this user has liked the post
                                 post.likeInfo?.usersId.includes(user._id)
-                                    ? 'text-[17px] text-red-400'
+                                    ? 'text-accent text-[17px]'
                                     : 'text-primary text-[17px]'
                             }
                         >
@@ -122,10 +122,10 @@ const PostCard = ({ post }) => {
                     {post.user._id === user._id && (
                         <div className="flex items-center gap-[2px]">
                             <ImBin
-                                className="cursor-pointer text-red-700"
+                                className="text-warning cursor-pointer"
                                 onClick={handleRemovePost}
                             />
-                            <span className="text-red-700">Remove</span>
+                            <span className="text-warning">Remove</span>
                         </div>
                     )}
                 </div>
