@@ -31,7 +31,7 @@ class PostsService {
      * @returns {Promise} A promise that resolves with the response containing the matching posts.
      */
     static searchPosts = (searchQuery) =>
-        axios.get(`/posts/search?searchQuery=${searchQuery}`);
+        axios.get(`/posts/search?searchQuery=${searchQuery}&public=1`);
 
     /**
      * Adds or removes a like for a post by its ID.
