@@ -22,6 +22,9 @@ import { Provider } from 'react-redux';
 // Import the Redux store configuration
 import store from './store/store';
 
+// Import the 'AuthGuardian' utility component for protecting routes that require authentication
+import AuthGuardian from "./utils/AuthGuardian";
+
 // Import page components for application routes
 import Home from './pages/Home/Home.jsx'; // Main landing page
 import Register from './pages/Register/Register'; // Import Register page component
@@ -29,11 +32,12 @@ import Login from './pages/Login/Login'; // Import Login page component
 import Error from './pages/Error/Error'; // Import Error page component
 import Posts from './pages/Posts/Posts'; // Import Posts page component
 
+
 /**
- * @file Entry point for the Chit-Chat-Connect React application.
+ * Entry point for the Chit-Chat-Connect React application.
  *
  * This file coordinates the rendering of the application, handles routing, and manages the global state with Redux.
- * It imports necessary libraries, components, and configurations, including React, ReactDOM, React Router, and Redux.
+ * It imports necessary libraries, components, and configurations, including React, ReactDOM, React Router, Redux and the AuthGuardian utility component.
  * The application routes are defined, and the Redux store is connected globally using the 'Provider' component.
  * Renders the main application within a 'RouterProvider' for efficient route handling.
  */
@@ -42,24 +46,28 @@ import Posts from './pages/Posts/Posts'; // Import Posts page component
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />, // Using the App component as the root element for routing
-        errorElement: <Error />, // Render the Error component for any encountered errors
+        element: <App />, // Using the 'App' component as the root element for routing
+        errorElement: <Error />, // Render the 'Error' component for any encountered errors
         children: [
             {
                 path: '/',
-                element: <Home />, // Render the Home component at the root URL '/'
+                element: <Home />, // Render the 'Home' component at the root URL '/'
             },
             {
                 path: '/register',
-                element: <Register />, // Render the Register component at '/register'
+                element: <Register />, // Render the 'Register' component at '/register'
             },
             {
                 path: '/login',
-                element: <Login />, // Render the Login component at '/login'
+                element: <Login />, // Render the 'Login' component at '/login'
             },
             {
                 path: '/posts',
-                element: <Posts />, // Render the Posts component at '/posts'
+                element: (
+					// Wrap 'Posts' component with 'AuthGuardian' to ensure only authenticated users can access it
+					<AuthGuardian>
+						<Posts /> {/* Render the 'Posts' component at '/posts' */}
+					</AuthGuardian>)
             },
         ],
     },
