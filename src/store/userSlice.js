@@ -12,9 +12,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     // Set the name of the slice to 'user'
     name: 'user',
-    // Set the initial state with an empty user object
+    // Set the initial state with an empty user object and a flag for login status
     initialState: {
-        user: {},
+        user: {}, // Empty object to store user information after login
+        loginSuccess: false, // Flag to track login success
     },
     // Reducers functions defining how the state should change
     reducers: {
@@ -22,17 +23,19 @@ const userSlice = createSlice({
         loginUser: (state, action) => {
             state.user = { ...action.payload };
             localStorage.setItem('sm_user', JSON.stringify(action.payload));
+            state.loginSuccess = true; // Set 'loginSuccess' flag to true on login success
         },
         // restoreUser reducer: Maintains user authentication state across page reloads
         // or return visits by updating the state with persisted user data
         restoreUser: (state, action) => {
             state.user = action.payload;
         },
-        // logoutUser reducer: Reset user state to an empty object and removes localStorage items
+        // logoutUser reducer: Reset user state to an empty object and removes localStorage items, resets loginSuccess flag
         logoutUser: (state, action) => {
-            state.user = {};
-            localStorage.removeItem('sm_user');
-            localStorage.removeItem('sm_token');
+            state.user = {}; // Clear the user state, logging the user out
+            localStorage.removeItem('sm_user'); // Remove user data from localStorage to clear session
+            localStorage.removeItem('sm_token'); // Remove token from localStorage to end session
+            state.loginSuccess = false; // Reset 'loginSuccess' flag on logout
         },
     },
 });
