@@ -40,6 +40,12 @@ axios.interceptors.request.use((config) => {
 });
 
 const App = () => {
+    useEffect(() => {
+        // Log the current environment and Axios base URL for debugging
+        console.log('Current Environment:', process.env.NODE_ENV);
+        console.log('Axios Base URL:', axios.defaults.baseURL);
+    }, []);
+
     // Initialize useDispatch hook to enable dispatching actions to the Redux store
     const dispatch = useDispatch();
 
