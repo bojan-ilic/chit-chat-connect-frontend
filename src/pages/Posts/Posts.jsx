@@ -1,25 +1,38 @@
 // Import 'useState' and 'useEffect' hooks from React for state management and side effects
 import { useEffect, useState } from 'react';
+
 // Import 'useSearchParams' hook from react-router-dom for managing URL search parameters
 import { useSearchParams } from 'react-router-dom';
+
 // Import 'useDispatch' and 'useSelector' hooks from react-redux for dispatching actions and selecting state
 import { useDispatch, useSelector } from 'react-redux';
+
 // Import 'PostsService' for making API calls related to posts
 import PostsService from '../../services/postsService';
+
 // Import 'storeAllPosts' action from 'postsSlice' for storing fetched posts in Redux store
 import { storeAllPosts } from '../../store/postsSlice';
+
 // Import 'PageLoaderAnimation' component to display a loading animation
 import PageLoaderAnimation from '../../components/PageLoaderAnimation/PageLoaderAnimation';
+
 // Import 'PostCard' component to display individual posts
 import PostCard from '../../components/PostCard/PostCard';
+
 // Import 'toast' from react-toastify for displaying notifications
 import { toast } from 'react-toastify';
+
 // Import 'Pagination' component for navigating through post pages
 import Pagination from '../../components/Pagination/Pagination';
+
 // Import 'PostSearch' component for searching posts
 import PostSearch from '../../components/PostSearch/PostSearch';
+
 // Import 'CreatePost' component for creating a new post
 import CreatePost from '../../components/CreatePost/CreatePost';
+
+// Import 'PostUserPermissions' component to display specific user permissions related to post interactions
+import PostUserPermissions from '../../components/PostUserPermissions/PostUserPermissions';
 
 /**
  * Posts.jsx
@@ -112,10 +125,10 @@ const Posts = () => {
     ]);
 
     return (
-        // Main container for posts and sidebar
-        <div className="mt-[30px] flex gap-5">
-            {/*Container for posts, taking up 70% width*/}
-            <div className="w-[70%]">
+        // Main container for posts and sidebar, ensuring top alignment
+        <div className="mt-[30px] flex items-start gap-5">
+            {/* Container for posts, taking up 70% width with flexible growth to accommodate content */}
+            <div className="flex w-[70%] flex-col space-y-4">
                 {isLoading ? (
                     // Displays loading animation if posts are still fetching
                     <PageLoaderAnimation />
@@ -133,10 +146,14 @@ const Posts = () => {
                 )}
             </div>
 
-            {/* Sidebar container, taking up 30% width */}
-            <div className="w-[30%]">
+            {/* Sidebar container, taking up 30% width with flexible growth for consistent alignment */}
+            <div className="flex w-[30%] flex-col space-y-4">
                 {/* Search component to filter posts */}
                 <PostSearch setSearchQuery={setSearchQuery} />
+
+                {/* 'PostUserPermissions' component informs users about their permissions regarding post interactions */}
+                <PostUserPermissions />
+
                 {/*Component to create a new post*/}
                 <CreatePost />
             </div>
@@ -144,5 +161,5 @@ const Posts = () => {
     );
 };
 
-// Export Posts page component for accessibility throughout the application
+// Export 'Posts' page component for accessibility throughout the application
 export default Posts;
