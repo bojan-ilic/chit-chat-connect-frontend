@@ -129,9 +129,11 @@ const CreatePost = () => {
     // Render the form for creating a new post
     return (
         // Main container for the create post form
-        <div className="border-primary mt-[20px] rounded-lg border p-[10px]">
+        <div className="border-primary mt-[20px] rounded-lg border px-2.5 py-5">
             {/* Title for the create post form */}
-            <h2 className="mb-[10px] text-center">Create A Memory</h2>
+            <h2 className="mb-[10px] text-center font-bold text-gray-600 ">
+                Create A Memory
+            </h2>
 
             <form
                 onSubmit={formik.handleSubmit}
