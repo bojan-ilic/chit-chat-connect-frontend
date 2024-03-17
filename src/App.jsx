@@ -26,10 +26,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 // Set the API base URL based on the environment
-axios.defaults.baseURL =
-    process.env.NODE_ENV === 'development'
-        ? 'http://localhost:4000/api'
-        : 'https://backend.chit-chat-connect.bojanilic.net/api';
+// axios.defaults.baseURL =
+//     process.env.NODE_ENV === 'development'
+//         ? 'http://localhost:4000/api'
+//         : 'https://backend.chit-chat-connect.bojanilic.net/api';
+
+axios.defaults.baseURL = 'https://backend.chit-chat-connect.bojanilic.net/api';
 
 // Use an interceptor to attach the token to every request if available
 axios.interceptors.request.use((config) => {
