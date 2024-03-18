@@ -25,13 +25,8 @@ import 'react-toastify/dist/ReactToastify.css';
 // Import axios for HTTP request functionality with RESTful APIs
 import axios from 'axios';
 
-// Set the API base URL based on the environment
-// axios.defaults.baseURL =
-//     process.env.NODE_ENV === 'development'
-//         ? 'http://localhost:4000/api'
-//         : 'https://backend.chit-chat-connect.bojanilic.net/api';
-
-axios.defaults.baseURL = 'https://backend.chit-chat-connect.bojanilic.net/api';
+// Set the API base URL from environment variable
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 // Use an interceptor to attach the token to every request if available
 axios.interceptors.request.use((config) => {
