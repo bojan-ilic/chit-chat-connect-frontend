@@ -25,7 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Import axios for HTTP request functionality with RESTful APIs
 import axios from 'axios';
 
-// Set the API base URL from environment variable
+// Configure Axios base URL using REACT_APP_API_BASE_URL environment variable
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 // Use an interceptor to attach the token to every request if available
@@ -37,12 +37,6 @@ axios.interceptors.request.use((config) => {
 });
 
 const App = () => {
-    useEffect(() => {
-        // Log the current environment and Axios base URL for debugging
-        console.log('Current Environment:', process.env.NODE_ENV);
-        console.log('Axios Base URL:', axios.defaults.baseURL);
-    }, []);
-
     // Initialize useDispatch hook to enable dispatching actions to the Redux store
     const dispatch = useDispatch();
 
