@@ -31,22 +31,26 @@ const Home = () => {
             <div className="mb-[23px] mt-[15px] grid grid-cols-1 lg:mt-[53px] lg:grid-cols-2 lg:gap-2">
                 {/* Container for the home page image */}
                 <div>
-                    <img src={HomePage} alt="A welcoming community" />
+                    <img
+                        src={HomePage}
+                        alt="A welcoming community"
+                        className="h-auto w-full object-cover"
+                    />
                 </div>
                 {/* Container for the textual content next to the image */}
-                <div className="lg:ml-[26px]">
+                <div className="mt-5 lg:ml-[26px] lg:mt-0">
                     {/* Conditional rendering based on whether the user is logged in or not */}
                     {isLoggedIn ? (
                         // Content displayed to logged-in users
                         <>
                             {/* Welcome message for returning users */}
                             <div className="border-primary flex h-[90px] items-center justify-center rounded-lg border ">
-                                <h2 className="text-primary text-[24px] font-bold uppercase ">
+                                <h2 className="text-primary p-2.5 text-[24px] font-bold uppercase">
                                     Welcome back!
                                 </h2>
                             </div>
                             {/* Section encouraging users to explore new posts and view their profile */}
-                            <div className="border-primary mt-10 flex flex-col items-center justify-center rounded-lg border pb-3 pt-3 text-[16px] font-bold ">
+                            <div className="border-primary mt-10 flex flex-col items-center justify-center rounded-lg border p-3 text-[16px] font-bold ">
                                 <p>Explore what's new today</p>
                                 <ul className="mt-3 flex flex-col items-center">
                                     {/* Link to the latest posts */}
@@ -69,12 +73,12 @@ const Home = () => {
                         <>
                             {/* A message inviting visitors to join the community */}
                             <div className="border-primary flex h-[90px] items-center justify-center rounded-lg border ">
-                                <h2 className="text-primary text-[24px] font-bold uppercase">
+                                <h2 className="text-primary p-2.5 text-[24px] font-bold uppercase">
                                     Join Our Community!
                                 </h2>
                             </div>
                             {/*Section encouraging visitors to sign up or log in */}
-                            <div className="border-primary mt-10 flex flex-col items-center justify-center rounded-lg border pb-3 pt-3 text-[16px] font-bold ">
+                            <div className="border-primary mt-10 flex flex-col items-center justify-center rounded-lg border p-3 text-[16px] font-bold ">
                                 <p>
                                     Sign up today and start sharing your stories
                                 </p>
