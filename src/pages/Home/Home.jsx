@@ -55,13 +55,19 @@ const Home = () => {
                                 <ul className="mt-3 flex flex-col items-center">
                                     {/* Link to the latest posts */}
                                     <li className="text-primary mb-2">
-                                        <Link to="/posts">
+                                        <Link
+                                            to="/posts"
+                                            className="hover:text-accent"
+                                        >
                                             Dive into Latest Posts
                                         </Link>
                                     </li>
                                     {/* Link to the user's profile page */}
                                     <li className="text-primary">
-                                        <Link to="/profile">
+                                        <Link
+                                            to="/profile"
+                                            className="hover:text-accent"
+                                        >
                                             View Your Profile & Contributions
                                         </Link>
                                     </li>
