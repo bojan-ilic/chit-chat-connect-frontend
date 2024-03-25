@@ -18,7 +18,7 @@ const HeaderNavBar = ({ isLoggedIn }) => {
         <nav className="flex gap-3">
             <NavLink
                 to="/"
-                className="navbar_link bg-primary hidden rounded-lg px-6 px-[14px] py-2 py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
+                className="navbar_link bg-primary hover:bg-accent hidden rounded-lg px-[14px] py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
             >
                 Home
             </NavLink>
@@ -28,13 +28,13 @@ const HeaderNavBar = ({ isLoggedIn }) => {
                 <>
                     <NavLink
                         to="/posts"
-                        className="navbar_link bg-primary hidden rounded-lg px-6 px-[14px] py-2 py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
+                        className="navbar_link bg-primary hover:bg-accent hidden rounded-lg px-[14px] py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
                     >
                         Posts
                     </NavLink>
                     <NavLink
                         to="/ads"
-                        className="navbar_link bg-primary hidden rounded-lg px-6 px-[14px] py-2 py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
+                        className="navbar_link bg-primary hover:bg-accent hidden rounded-lg px-[14px] py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
                     >
                         Ads
                     </NavLink>
@@ -44,13 +44,13 @@ const HeaderNavBar = ({ isLoggedIn }) => {
                 <>
                     <NavLink
                         to="/register"
-                        className="navbar_link bg-primary hidden rounded-lg px-6 px-[14px] py-2 py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
+                        className="navbar_link bg-primary hover:bg-accent hidden rounded-lg px-[14px] py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
                     >
                         Register
                     </NavLink>
                     <NavLink
                         to="/login"
-                        className="navbar_link bg-primary hidden rounded-lg px-6 px-[14px] py-2 py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
+                        className="navbar_link bg-primary hover:bg-accent hidden rounded-lg px-[14px] py-[7px] text-white lg:ml-auto lg:mr-3 lg:inline-block"
                     >
                         Login
                     </NavLink>
