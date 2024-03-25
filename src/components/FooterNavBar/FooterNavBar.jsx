@@ -18,8 +18,13 @@ const FooterNavBar = () => {
 
     return (
         <nav className="flex flex-col">
+            <p className="mb-2 font-bold uppercase">Information</p>
             {footerNavItems.map((item, index) => (
-                <NavLink key={index} to={item.to}>
+                <NavLink
+                    key={index}
+                    to={item.to}
+                    className="hover:text-accent mb-[5px]"
+                >
                     {item.text}
                 </NavLink>
             ))}
