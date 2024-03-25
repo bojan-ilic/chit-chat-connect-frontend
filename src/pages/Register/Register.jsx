@@ -356,7 +356,7 @@ const Register = () => {
                                 <div className="mt-[26px]">
                                     <button
                                         type="submit"
-                                        className="bg-primary w-full rounded px-4 py-2 font-bold text-white hover:bg-blue-700"
+                                        className="bg-primary hover:bg-accent w-full rounded px-4 py-2 font-bold text-white hover:bg-blue-700"
                                     >
                                         Register
                                     </button>
@@ -368,7 +368,7 @@ const Register = () => {
                     {/* Message and link for users who already have an account */}
                     <AuthRedirectMessage
                         message="Already have an account?"
-                        linkText="Click here to Sign in."
+                        linkText="Click here to Sign in"
                         redirectTo="/login"
                     />
                 </div>
