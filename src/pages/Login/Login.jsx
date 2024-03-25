@@ -208,7 +208,7 @@ const Login = () => {
                             <div className="mt-[26px]">
                                 <button
                                     type="submit"
-                                    className="bg-primary w-full rounded px-4 py-2 font-bold text-white hover:bg-blue-700"
+                                    className="bg-primary hover:bg-accent w-full rounded px-4 py-2 font-bold text-white hover:bg-blue-700"
                                 >
                                     Sign in
                                 </button>
@@ -218,7 +218,7 @@ const Login = () => {
                     {/* Display a message for users to register if they don't have an account */}
                     <AuthRedirectMessage
                         message="Don't have an account?"
-                        linkText="Click here to Register."
+                        linkText="Click here to Register"
                         redirectTo="/register"
                     />
                 </div>
