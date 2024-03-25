@@ -16,7 +16,7 @@ const AuthRedirectMessage = ({ message, linkText, redirectTo }) => {
     return (
         <div className="border-primary mt-[30px] flex h-[90px] flex-col items-center justify-center rounded-lg border font-bold">
             <p>{message}</p>
-            <Link to={redirectTo} className="text-primary">
+            <Link to={redirectTo} className="text-primary hover:text-accent">
                 {linkText}
             </Link>
         </div>
